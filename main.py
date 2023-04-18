@@ -85,7 +85,7 @@ if __name__ == '__main__':
                     y1, x2, y2, x1 = [i*4 for i in face_loc]
                     cv2.rectangle(frame, (x1, y1), (x2, y2), (0, 255, 0), 2)
                     cv2.rectangle(frame, (x1, y2-35), (x2, y2), (0, 255, 0), cv2.FILLED)
-                    cv2.putText(frame, tag, (x1 + 6, y2 - 6), cv2.FONT_HERSHEY_COMPLEX, 1, (255, 255, 255), 2)
+                    cv2.putText(frame, label, (x1 + 6, y2 - 6), cv2.FONT_HERSHEY_COMPLEX, 1, (255, 255, 255), 2)
                     label = label[:label.index('_')]
                     print(f'{label} detected.')
                     mark_attendance(label)
@@ -99,5 +99,6 @@ if __name__ == '__main__':
         
         cap.release()
         cv2.destroyAllWindows()
+    
     except Exception as e:
         print(e)
