@@ -29,15 +29,19 @@ def mark_attendance(name):
     day, names = datetime.now().strftime('%d_%m'), set()
     datapath = os.path.dirname(__file__) + '\\data'
     filepath = datapath + f'\\attendance_{day}.csv'
-    with open(filepath, 'r+') as file:
-        content = file.readlines()
-        if not content: file.write('Name,Time')
-        for line in content:
-            entry = line.split(',')
-            names.add(entry[0])
-        if name not in names:
-            time = datetime.now().strftime('%H:%M:%S')
-            file.writelines(f'\n{name},{time}')
+    try:
+        with open(filepath, 'r+') as file:
+            content = file.readlines()
+            if not content: file.write('Name,Time')
+            for line in content:
+                entry = line.split(',')
+                names.add(entry[0])
+            if name not in names:
+                time = datetime.now().strftime('%H:%M:%S')
+                file.writelines(f'\n{name},{time}')
+    except Exception as e:
+        with open(filepath, 'w') as file:
+            file.write('Name,Time')
     return filepath
 
 
